@@ -61,13 +61,14 @@ public class SecurityConfig {
 	        .authorizeHttpRequests((requests) -> {
 			requests
 				.requestMatchers("/loginuser").permitAll()
+				.requestMatchers("/socios/add_socio").permitAll()
+				.requestMatchers("/socios/dni/**").permitAll()
 				.requestMatchers( HttpMethod.GET, "/barcos/**").authenticated()
 				.requestMatchers("/barcos/**").hasAuthority("admin")
 				.requestMatchers( HttpMethod.GET, "/salidas/**").authenticated()
 				.requestMatchers("/salidas/**").hasAuthority("admin")
-				.requestMatchers("/socios/**").hasAuthority("admin")
-				.requestMatchers("/socios/add_socio").authenticated()
 				.requestMatchers(HttpMethod.GET, "/socios/**").authenticated()
+				.requestMatchers("/socios/**").hasAuthority("admin")
 				.anyRequest().denyAll();
 	        })
 	        .formLogin((form) -> form.permitAll())
